@@ -1,0 +1,834 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "resourcegroup": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "subscriptionId": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspace": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspaceapiversion": {
+            "type": "string",
+            "defaultValue": ""
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "[parameters('workspaceapiversion')]",
+            "name": "[parameters('workspace')]",
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "location": "[parameters('location')]",
+            "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]",
+            "resources": [
+                {
+                    "apiVersion": "2015-11-01-preview",
+                    "name": "Public Key Infrastructure",
+                    "type": "views",
+                    "location": "[parameters('location')]",
+                    "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'),'/views/Public Key Infrastructure')]",
+                    "dependson": [
+                        "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]"
+                    ],
+                    "properties": {
+                        "Id": "Public Key Infrastructure",
+                        "Name": "Public Key Infrastructure",
+                        "Author": "jakob.knutsson@addlevel.se",
+                        "Source": "Local",
+                        "Version": 2,
+                        "Dashboard": [
+                            {
+                                "Id": "InformationBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "Title": "Public Key Infrastructure",
+                                        "NewGroup": false,
+                                        "Color": "#009e49"
+                                    },
+                                    "Header": {
+                                        "Image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAztJREFUeNrUmktoE1EUhqexKj4zJWoaqIpVaVGxKr6ogsaNbhS0YKkKFeKmriwFEaXYnY+FYjeCbmtRRBeuXIlLMe1CXGlduBOt0rS1FaF2/A+ciWMy0yT3njvN/PBtMuHc8899zJ1zp8ZxHEtAKXAE7AdNYBOwGVKO+QQ+gDfgFfii23CNhoHV4CyzWzHGEBgEA2BUKQIZqJAG0A+mHTn9AvfB2krzqeTPi8AVMOWYE92UPrBY2kAzeOeEp/fcZsncYmWMsjaQBdut8LSN22zTnQMXwYwzf5rhHJSGUJdTPeoKyjNoGT0JnoIFCt1/GXwOuNYIbirE/APawbNyhlATmNS4W4fm6NW0Rlxa/baWmsQLwROwXGMC2orXSmkpeMw55lVooAe0aK4gcUMG3NWpJ8hAA+gVWAJtRXPlqpdzLTJwlbvJpAFbID7leK3QwCpwXughFDdsgNTJOecN0A9LhIKbHkIW59rpNdAhuA2wQ+gB0hnXQBLsiqCBnaCeDKTpxUYwcDwkA5TzYTLQKryTDGMOuDoQ44eDFcEhRNpCBtYJB42HaGC9O4klVRuwl1opPNdIa2KaG7dK7nSdgXZWxCwzskOYwPmtxISBuPEQxj9pnAx8NRC4LiQDo2RgJMI98DHGtUpppbgXvNSbMEAv9af5NTKKaicDtK/+ZmCNNi0qpyRpCH3nKnHUNOROYtIj4eDTXP9JMzfAlHAbg966UEKwXE71m70+NSH67bdgFTvhrQv9AA+E7sw98Nbnd/rtjlAbDznn/ypzKc2KnKuDc1TmWgXiT3KuRZU5Oq+6LrQ6BGlWIH6f5TlbK9zM9YNhzQaOKV4rR8M8RD23q7ibG0FOo4snwA6fuC18TVWU08Zyy+snwHNLrbxu8ZJ5F7zkIXUUdNP+XTEelddPgRfFAzZ4wmXAbBUcblAOF1QP+TJVcMSU0T2lPA7G5iH5HLctcsy6AWRDTD7LbYoedNeCS2DcYOK0SnVzW+In9S5JcEtzSfRL/DbHrigfnY896C2LPvQ4B/b4PBRLiZ7KdJg9wLvhMaUCqdDnNgkqtIJ9oBlspqITWMYvSj/5pWnE+ve5zev8hkxDfwUYAP0NkvYTPlJVAAAAAElFTkSuQmCC",
+                                        "Label": "PKI Solution",
+                                        "Link": {
+                                            "Label": "More Information",
+                                            "Url": "https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn786423%28v%3dws.11%29"
+                                        }
+                                    },
+                                    "List": [
+                                        {
+                                            "Title": "Information om denna lösning",
+                                            "Content": "## Information\nDenna lösning är till för att visualisera vad som händer i __*PKI-Miljön*__\n\nInformationen kommer från OMS-gruppen PKIServers och SecurityEvent EventID 4868 till 4898\n\naddlevel.se"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "Id": "LineChartCalloutBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Event Counts and Hourly Distribution",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Hourly Event Distribution",
+                                        "Subtitle": ""
+                                    },
+                                    "LineChart": {
+                                        "Query": "SecurityEvent | where EventID >= 4868 and EventID <= 4898 and Computer in (['PKIServers']) | summarize Count = count() by bin(TimeGenerated, 1h) | sort by TimeGenerated desc// Oql: Type=SecurityEvent EventID:[4868..4898] Computer in $ComputerGroups[PKI] | measure count() AS Count by TimeGenerated Interval 1Hour",
+                                        "Callout": {
+                                            "Title": "Avg per hour",
+                                            "Series": "",
+                                            "Operation": "Average"
+                                        },
+                                        "yAxis": {
+                                            "isLogarithmic": false,
+                                            "units": {
+                                                "baseUnitType": "",
+                                                "baseUnit": "",
+                                                "displayUnit": ""
+                                            },
+                                            "customLabel": ""
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where EventID >= 4868 and EventID <= 4898 and Computer in (['PKIServers']) | summarize Count = count() by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Type",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search in (SecurityEvent) {selected item} and Computer in (['PKIServers']) | summarize Count = count() by Activity// Oql: Type=SecurityEvent {selected item} Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Certificate and revocation",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Events",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "SecurityEvent | where (EventID >= 4886 and EventID <= 4889 or EventID >= 4868 and EventID <= 4872) and Computer in (['PKIServers']) | summarize Count = count() by Activity | sort by Count desc// Oql: Type=SecurityEvent EventID:[4886..4889] OR EventID:[4868..4872] Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID >= 4886 and EventID <= 4889 or EventID >= 4868 and EventID <= 4872) and Computer in (['PKIServers']) | summarize Count = count() by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "EventID - Activity",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}// Oql: {selected item}",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Certificate Services",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "SecurityEvent | where EventID >= 4875 and EventID <= 4882 and Computer in (['PKIServers']) | summarize Count = count() by Activity | sort by Count desc// Oql: Type=SecurityEvent EventID:[4875..4882] Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where EventID >= 4875 and EventID <= 4882 and Computer in (['PKIServers']) | summarize Count = count() by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "EventID - Activity",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoNumberTileListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Configuration changes",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Tile": {
+                                        "Legend": "Config Entry",
+                                        "Query": "SecurityEvent | where EventID == 4891 and Computer in (['PKIServers']) | summarize Count = count() by Activity| count // Oql: Type=SecurityEvent EventID=4891 Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity"
+                                    },
+                                    "SecondTile": {
+                                        "Legend": "Property change",
+                                        "Query": "SecurityEvent | where EventID == 4892 and Computer in (['PKIServers']) | summarize Count = count() by Activity| count"
+                                    },
+                                    "List": {
+                                        "Query": "search EventID >= 4890 and EventID <= 4891 and Computer in (['PKIServers']) | summarize Count = count() by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Computer",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "|| FORCE SYNTAX ERROR || Reason: Parser error: line 1:111 extraneous input '{selected item}' expecting {<EOF>, ',', '|', INTERVAL} ||// Oql: Type=SecurityEvent EventID:[4890..4891] Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity{selected item}",
+                                        "NavigationSelect": {}
+                                    },
+                                    "Blade": {
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "NumberTileListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Denied Cert Requests by Computer",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Tile": {
+                                        "Query": "SecurityEvent | where isempty(PKIReq4888_CF)==False | summarize AggregatedValue = count() by PKIReq4888_CF | count ",
+                                        "Legend": "Computers with failed requests",
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where isempty(PKIReq4888_CF)==False | summarize AggregatedValue = count() by PKIReq4888_CF",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Computer",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#ba141a",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Non-Published Cert Templates",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "Expected Cert Templates",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search EventID == 4898 and Computer in (['PKIServers']) | summarize Count = count() by TemplateInternalName",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "Unexpected Cert Templates",
+                                        "LegendColor": "#ba141a",
+                                        "ChartQuery": "search EventID == 4898 and Computer in (['PKIServers']) | where not(TemplateInternalName==\"Customer-Cert-DomainServers-SHA256\" or TemplateInternalName==\"Customer-Cert-DomainComputers-SHA256\" or TemplateInternalName==\"Customer-Cert-External-SHA256\" or TemplateInternalName==\"Customer-Cert-InternalWebServer-SHA256\" or TemplateInternalName==\"Customer-Cert-NDES-SHA256\" or TemplateInternalName==\"KerberosAuthentication\" or TemplateInternalName==\"Customer-Cert-SmartcardLogon-SHA256\" or TemplateInternalName==\"CustomerServers-SHA256\" or TemplateInternalName==\"Customer-Cert-WindowsPE-SHA256\") | summarize Count = count() by TemplateInternalName",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "search EventID == 4898 and Computer in (['PKIServers']) | where not(TemplateInternalName==\"Customer-Cert-DomainServers-SHA256\" or TemplateInternalName==\"Customer-Cert-DomainComputers-SHA256\" or TemplateInternalName==\"Customer-Cert-External-SHA256\" or TemplateInternalName==\"Customer-Cert-InternalWebServer-SHA256\" or TemplateInternalName==\"Customer-Cert-NDES-SHA256\" or TemplateInternalName==\"KerberosAuthentication\" or TemplateInternalName==\"Customer-Cert-SmartcardLogon-SHA256\" or TemplateInternalName==\"CustomerServers-SHA256\" or TemplateInternalName==\"Customer-Cert-WindowsPE-SHA256\") | summarize Count = count() by TemplateInternalName",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Computer",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#e81123",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "2",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    },
+                                    "Blade": {
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "NumberTileListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Smart Card Changes by Account",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Tile": {
+                                        "Query": "SecurityEvent | where AccountType == 'User' and EventID == 4738 | search \"%%2060\" | summarize AggregatedValue = count() by TargetAccount | count",
+                                        "Legend": "Accounts with \"smart card required for interactive logon\" removed",
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where AccountType == 'User' and EventID == 4738 | search \"%%2060\" | summarize AggregatedValue = count() by TargetAccount, Account",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "TargetUser",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Pending Certificate Requests",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Pending by Account",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "SecurityEvent | where EventID==4889 | where isempty(PKI4889Request_CF)==False | summarize Count = count() by PKI4889Request_CF",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where EventID==4889 | where isempty(PKI4889Request_CF)==False | summarize Count = count() by PKI4889Request_CF",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "User",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Issued Smart Card Certificates",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Issued to Users",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "SecurityEvent | where EventID==4887 | where isempty(PKIUser4887_CF)==False | summarize AggregatedValue = count() by PKIUser4887_CF",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where EventID==4887 | where isempty(PKIUser4887_CF)==False | summarize AggregatedValue = count() by PKIUser4887_CF",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "User",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "LineChartCalloutStackedBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Performance",
+                                        "newGroup": false
+                                    },
+                                    "charts": [
+                                        {
+                                            "Header": {
+                                                "Title": "CPU % Avg over 1h",
+                                                "Subtitle": ""
+                                            },
+                                            "LineChart": {
+                                                "Query": "Perf | where CounterName == \"% Processor Time\" and InstanceName == \"_Total\" and Computer in (['PKIServers']) | summarize AggregatedValue = avg(CounterValue) by Computer, bin(TimeGenerated, 1h) | sort by TimeGenerated desc// Oql: Type=Perf CounterName=\"% Processor Time\" InstanceName=\"_Total\" Computer IN $ComputerGroups[PKI] | measure avg(CounterValue) by Computer Interval 1HOUR",
+                                                "yAxis": {
+                                                    "isLogarithmic": false,
+                                                    "units": {
+                                                        "baseUnitType": "Percentage",
+                                                        "baseUnit": "ZeroToOne",
+                                                        "displayUnit": "ZeroToOne"
+                                                    },
+                                                    "customLabel": "Avg"
+                                                },
+                                                "NavigationSelect": {}
+                                            }
+                                        },
+                                        {
+                                            "Header": {
+                                                "Title": "% Committed Memory Avg over 1h",
+                                                "Subtitle": ""
+                                            },
+                                            "LineChart": {
+                                                "Query": "Perf | where ObjectName == \"Memory\" and CounterName == \"% Committed Bytes In Use\" and Computer in (['PKIServers']) | summarize AggregatedValue = avg(CounterValue) by Computer, bin(TimeGenerated, 1h) | sort by TimeGenerated desc// Oql: Type=Perf (ObjectName=Memory) (CounterName=\"% Committed Bytes In Use\") Computer IN $ComputerGroups[PKI] | measure avg(CounterValue) by Computer Interval 1HOUR",
+                                                "yAxis": {
+                                                    "isLogarithmic": false,
+                                                    "units": {
+                                                        "baseUnitType": "Percentage",
+                                                        "baseUnit": "ZeroToOne",
+                                                        "displayUnit": "ZeroToOne"
+                                                    },
+                                                    "customLabel": "Avg"
+                                                },
+                                                "NavigationSelect": {}
+                                            }
+                                        },
+                                        {
+                                            "Header": {
+                                                "Title": "Data from Sources over time",
+                                                "Subtitle": ""
+                                            },
+                                            "LineChart": {
+                                                "Query": "Perf | where ObjectName == \"Paging File\" and CounterName == \"% Usage\" and Computer in (['PKIServers']) | summarize AggregatedValue = avg(CounterValue) by Computer, bin(TimeGenerated, 1h) | sort by TimeGenerated desc// Oql: Type=Perf (ObjectName=\"Paging File\") (CounterName=\"% Usage\") Computer IN $ComputerGroups[PKI] | measure avg(CounterValue) by Computer Interval 1HOUR",
+                                                "yAxis": {
+                                                    "isLogarithmic": false,
+                                                    "units": {
+                                                        "baseUnitType": "Percentage",
+                                                        "baseUnit": "ZeroToOne",
+                                                        "displayUnit": "ZeroToOne"
+                                                    },
+                                                    "customLabel": "Avg"
+                                                },
+                                                "NavigationSelect": {}
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "Id": "NumberTileListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Distribution by Computer",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Tile": {
+                                        "Query": "SecurityEvent | where (EventID == 15 or EventID == 60 or EventID == 15 or EventID == 95 or EventID == 4882 or EventID == 4885 or EventID == 4890 or EventID == 4896 or EventID == 4657) and Computer in (['PKIServers']) | summarize Count = count() by Activity\r\n| count // Oql: Type=SecurityEvent EventID=15 OR EventID=60 or EventID=15 OR EventID=95 or EventID=4882 OR EventID=4885 or EventID=4890 OR EventID=4896 OR EventID=4657 Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity",
+                                        "Legend": "Computers sending data",
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID == 15 or EventID == 60 or EventID == 15 or EventID == 95 or EventID == 4882 or EventID == 4885 or EventID == 4890 or EventID == 4896 or EventID == 4657) and Computer in (['PKIServers']) | summarize Count = count() by Activity\r\n// Oql: Type=SecurityEvent EventID=15 OR EventID=60 or EventID=15 OR EventID=95 or EventID=4882 OR EventID=4885 or EventID=4890 OR EventID=4896 OR EventID=4657 Computer in $ComputerGroups[PKI] | measure Count() AS Count by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Computer",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            }
+                        ],
+                        "Filters": [],
+                        "OverviewTile": {
+                            "Id": "TwoTrendsBuilderTile",
+                            "Type": "OverviewTile",
+                            "Version": 2,
+                            "Configuration": {
+                                "Trend1": {
+                                    "Legend": "Issued Certs",
+                                    "LegendColor": "#009e49",
+                                    "ChartQuery": "SecurityEvent | where EventID == 4887 and Computer in (['PKIServers']) | sort by TimeGenerated desc// Oql: Type=SecurityEvent EventID=4887 Computer in $ComputerGroups[PKI]",
+                                    "Calculation": {
+                                        "Operation": "Sum"
+                                    }
+                                },
+                                "Trend2": {
+                                    "Legend": "Denied Certs",
+                                    "LegendColor": "#e81123",
+                                    "ChartQuery": "SecurityEvent | where EventID == 4888 and Computer in (['PKIServers']) | sort by TimeGenerated desc// Oql: Type=SecurityEvent EventID=4888 Computer in $ComputerGroups[PKI]",
+                                    "Calculation": {
+                                        "Operation": "Sum"
+                                    }
+                                },
+                                "Advanced": {
+                                    "DataFlowVerification": {
+                                        "Enabled": false,
+                                        "Query": "search *// Oql: *",
+                                        "Message": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
