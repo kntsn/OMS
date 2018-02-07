@@ -43,7 +43,7 @@
                     "properties": {
                         "Id": "Exflow Response TImes",
                         "Name": "ExFlow Response Times",
-                        "Author": "azure@signup.se",
+                        "Author": "jakob.knutsson@addlevel.se",
                         "Source": "Local",
                         "Version": 2,
                         "Dashboard": [

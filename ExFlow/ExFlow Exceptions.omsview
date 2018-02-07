@@ -43,7 +43,7 @@
                     "properties": {
                         "Id": "ExFlow Exceptions",
                         "Name": "ExFlow Exceptions",
-                        "Author": "azure@signup.se",
+                        "Author": "jakob.knutsson@addlevel.se",
                         "Source": "Local",
                         "Version": 2,
                         "Dashboard": [
