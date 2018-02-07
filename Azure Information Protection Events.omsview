@@ -1,0 +1,428 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "resourcegroup": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "subscriptionId": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspace": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspaceapiversion": {
+            "type": "string",
+            "defaultValue": ""
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "[parameters('workspaceapiversion')]",
+            "name": "[parameters('workspace')]",
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "location": "[parameters('location')]",
+            "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]",
+            "resources": [
+                {
+                    "apiVersion": "2015-11-01-preview",
+                    "name": "AIP Events",
+                    "type": "views",
+                    "location": "[parameters('location')]",
+                    "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'),'/views/AIP Events')]",
+                    "dependson": [
+                        "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]"
+                    ],
+                    "properties": {
+                        "Id": "AIP Events",
+                        "Name": "AIP Events",
+                        "Author": "jakob.knutsson@addlevel.se",
+                        "Source": "Local",
+                        "Version": 2,
+                        "Dashboard": [
+                            {
+                                "Id": "InformationBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "Title": "Addlevel OMS solutions",
+                                        "NewGroup": false,
+                                        "Color": "#0072c6"
+                                    },
+                                    "Header": {
+                                        "Image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAAAtCAYAAADMf6VHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjgzMTEzQTRGRTkwMTFFNkE5RTQ5RTdGMzMxOTk1NzkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjgzMTEzQTNGRTkwMTFFNkE5RTQ5RTdGMzMxOTk1NzkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NTgzMjA4QTU0NkYxMUU0QkUzM0ZGRkZGODkyNDEzNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5NTgzMjA4QjU0NkYxMUU0QkUzM0ZGRkZGODkyNDEzNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvvOgyIAAAJtSURBVHja7J1bloQgDERNn97/ljMLmP5AyaMit/4RAnXlIaC5+4UQypEBGEIAtqLVQEww/+6yo6Q2BjAAQwAGYAAGYAAGYAAGYACGAAzAAAzAAAzAAAzAAAwBGIABGIABGIABGIABGJoE2A6BVhhMtEn95rMUAfOENuuo59XnebJHwwCL7tayjWGBDfW0kZQA88Q2UwTMizwqC1i1OU4GzJPryrtNWxzvGMCyzB1Zhq78Xbj+FMprzfGmzMH8MMCqVnuyDOuFZVYAzIU90gaYqsGnA1Y9rK4EzATiBbDCecV0wCwgXWWZTSTecMB+PTB0fDrQ4IqAeVPeEwDbybsMsIzVP2syyfT0nfM3C0xXavLOl0r0Tg5vAmyKSVUBW3mOiUDSOf9LByyKRhtYaacDFtluAFa80AFg+T1/5/zRAtIozJdvt9NXIIgpYqMtum+aHz2YT3gzCAxzFCbuCj3Y3bh9s65H9WAfei6E8vShChCqGSJ2LpW/YYh46iLHalns2h8ejhsiPgFM4gNeA2BZsSvUW4S8AOLumI8GjA/NvZABWDJgnVulqkzanb4DsKztck/LGH3gcwRgvlmRlemjy+8BJup8OayYSQmwrJhX4i0BLGsYwHGVmtFDpvF3ylKRR/koCcBmAQ5gNTG/ErCqMnBlAIC1AHZKL8KlN3rm31mAOQqwiI+JPjTv6+o9RJhpOlXAquMNOa4S0cX7ZoX6S/OuACzDdMqAZcQsdenNE8N07kzPujp7J3+lq7Ore5aub1WZL9/tu+mrz0Z5Y/7eHHuV+d543s2L4f6fwYv+roKQnAAMIQBDaKb+BBgAPt28w7tVpH0AAAAASUVORK5CYII=",
+                                        "Label": "AIP Events",
+                                        "Link": {
+                                            "Label": "Visit addlevel.se",
+                                            "Url": "https://www.addlevel.se"
+                                        }
+                                    },
+                                    "List": [
+                                        {
+                                            "Title": "This solution aims to visualize Azure Information Protection events",
+                                            "Content": "## This is a preview solution developed by Addlevel. \n\nTo search all AIP events use: \n\n\n``search Source == \"Azure Information Protection\"``\n\n"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Distribution by Computer",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "--",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by EventID | sort by AggregatedValue desc// Oql: \"Azure Information Protection\" Type=Event NOT EventID=901  | measure count() by EventID",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#0072c6",
+                                                "#b4009e",
+                                                "#9b4f96"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by Computer// Oql: \"Azure Information Protection\" Type=Event NOT EventID=901  | measure count() by Computer",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Computer",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}// Oql: {selected item}",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Distribution by User",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "--",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by EventID | sort by AggregatedValue desc// Oql: \"Azure Information Protection\" Type=Event NOT EventID=901  | measure count() by EventID",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#0072c6",
+                                                "#b4009e",
+                                                "#9b4f96"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by UserName",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "User",
+                                            "Value": "Event Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "DOCUMENTS WITH LOWERED STATUS",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "ALL AIP DATA",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search Source == \"Azure Information Protection\" | sort by TimeGenerated desc\r\n// Oql: Source=\"Azure Information Protection\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "All AIP EVENTS",
+                                        "LegendColor": "#b4009e",
+                                        "ChartQuery": "Event | where Source == \"Azure Information Protection\" | sort by TimeGenerated desc\r\n// Oql: Source=\"Azure Information Protection\" (Type=Event)",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "Event | where isnotempty(AIP_Action_CF) | summarize AggregatedValue = count() by AIP_Action_CF\r\n// Oql: Type=Event (AIP_Action_CF=*) | select AIP_Action_CF | measure count() by AIP_Action_CF",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "ACTION",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}",
+                                        "NavigationSelect": {}
+                                    },
+                                    "Blade": {
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "LineChartBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "AIP Events Over Time",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "--",
+                                        "Subtitle": ""
+                                    },
+                                    "LineChart": {
+                                        "Query": "union withsource = $table Event, Update | where Source == \"Azure Information Protection\" | extend Type = $table | summarize AggregatedValue = count() by bin(TimeGenerated, 1h), Type | sort by TimeGenerated desc | render timechart// Oql: Source=\"Azure Information Protection\" Type=Event OR Type=Update | measure count() by Type | display linechart",
+                                        "yAxis": {
+                                            "isLogarithmic": false,
+                                            "units": {
+                                                "baseUnitType": "",
+                                                "baseUnit": "",
+                                                "displayUnit": ""
+                                            },
+                                            "customLabel": ""
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by EventID// Oql: \"Azure Information Protection\" Type=Event NOT EventID=901  | measure count() by EventID",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Type",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}// Oql: {selected item}",
+                                        "NavigationSelect": {}
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "NotableQueriesBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Azure Information Protection QUERIES",
+                                        "newGroup": false,
+                                        "preselectedFilters": "Type, Computer",
+                                        "renderMode": "grid"
+                                    },
+                                    "queries": [
+                                        {
+                                            "query": "search AIP_Action_CF == \"Set Label (lower)\" | sort by TimeGenerated desc// Oql: AIP_Action_CF=\"Set Label (lower)\"",
+                                            "displayName": "Documents with lowered status"
+                                        },
+                                        {
+                                            "query": "search isnotempty(AIP_Reason_CF) | sort by TimeGenerated desc// Oql: AIP_Reason_CF=*",
+                                            "displayName": "Show AIP Reason"
+                                        },
+                                        {
+                                            "query": "search isnotempty(AIP_Filelocation_CF) | sort by TimeGenerated desc// Oql: AIP_Filelocation_CF=*",
+                                            "displayName": "Show AIP File Location"
+                                        },
+                                        {
+                                            "query": "Event | where EventID == 102 | sort by TimeGenerated desc | project Computer, AIP_Filelocation_CF, AIP_Action_CF, AIP_Reason_CF, AIP_Comment_CF, EventID, TimeGenerated// Oql: (Type=Event) EventID=102 | select Computer, AIP_Filelocation_CF, AIP_Action_CF, AIP_Reason_CF, AIP_Comment_CF, EventID, TimeGenerated",
+                                            "displayName": "AIP Event Details and Comments"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "Filters": [],
+                        "OverviewTile": {
+                            "Id": "SingleQueryDonutBuilderTileV1",
+                            "Type": "OverviewTile",
+                            "Version": 2,
+                            "Configuration": {
+                                "Donut": {
+                                    "Query": "search in (Event) \"Azure Information Protection\" and EventID != 901 | summarize AggregatedValue = count() by EventID | sort by AggregatedValue desc\r\n// Oql: \"Azure Information Protection\" Type=Event NOT EventID=901 | measure count() by EventID",
+                                    "CenterLegend": {
+                                        "Text": "Total",
+                                        "Operation": "Sum",
+                                        "ArcsToSelect": []
+                                    },
+                                    "Options": {
+                                        "colors": [
+                                            "#0072c6",
+                                            "#b4009e",
+                                            "#68217a"
+                                        ],
+                                        "valueColorMapping": [],
+                                        "legend": true,
+                                        "skipLegendPositioning": true,
+                                        "center": true,
+                                        "unitType": "Count",
+                                        "fromUnit": "Ones"
+                                    },
+                                    "HideOtherLegend": true
+                                },
+                                "Advanced": {
+                                    "DataFlowVerification": {
+                                        "Enabled": false,
+                                        "Query": "search *\r\n// Oql: *",
+                                        "Message": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
