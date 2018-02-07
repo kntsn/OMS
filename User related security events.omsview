@@ -1,0 +1,448 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "resourcegroup": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "subscriptionId": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspace": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "workspaceapiversion": {
+            "type": "string",
+            "defaultValue": ""
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "[parameters('workspaceapiversion')]",
+            "name": "[parameters('workspace')]",
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "location": "[parameters('location')]",
+            "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]",
+            "resources": [
+                {
+                    "apiVersion": "2015-11-01-preview",
+                    "name": "User related security events",
+                    "type": "views",
+                    "location": "[parameters('location')]",
+                    "id": "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'),'/views/User related security events')]",
+                    "dependson": [
+                        "[Concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('resourcegroup'), '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspace'))]"
+                    ],
+                    "properties": {
+                        "Id": "User related security events",
+                        "Name": "User related security events",
+                        "Author": "jakob.knutsson@addlevel.se",
+                        "Source": "Local",
+                        "Version": 2,
+                        "Dashboard": [
+                            {
+                                "Id": "InformationBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "Title": "",
+                                        "NewGroup": false,
+                                        "Color": "#0072c6"
+                                    },
+                                    "Header": {
+                                        "Image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAztJREFUeNrUmktoE1EUhqexKj4zJWoaqIpVaVGxKr6ogsaNbhS0YKkKFeKmriwFEaXYnY+FYjeCbmtRRBeuXIlLMe1CXGlduBOt0rS1FaF2/A+ciWMy0yT3njvN/PBtMuHc8899zJ1zp8ZxHEtAKXAE7AdNYBOwGVKO+QQ+gDfgFfii23CNhoHV4CyzWzHGEBgEA2BUKQIZqJAG0A+mHTn9AvfB2krzqeTPi8AVMOWYE92UPrBY2kAzeOeEp/fcZsncYmWMsjaQBdut8LSN22zTnQMXwYwzf5rhHJSGUJdTPeoKyjNoGT0JnoIFCt1/GXwOuNYIbirE/APawbNyhlATmNS4W4fm6NW0Rlxa/baWmsQLwROwXGMC2orXSmkpeMw55lVooAe0aK4gcUMG3NWpJ8hAA+gVWAJtRXPlqpdzLTJwlbvJpAFbID7leK3QwCpwXughFDdsgNTJOecN0A9LhIKbHkIW59rpNdAhuA2wQ+gB0hnXQBLsiqCBnaCeDKTpxUYwcDwkA5TzYTLQKryTDGMOuDoQ44eDFcEhRNpCBtYJB42HaGC9O4klVRuwl1opPNdIa2KaG7dK7nSdgXZWxCwzskOYwPmtxISBuPEQxj9pnAx8NRC4LiQDo2RgJMI98DHGtUpppbgXvNSbMEAv9af5NTKKaicDtK/+ZmCNNi0qpyRpCH3nKnHUNOROYtIj4eDTXP9JMzfAlHAbg966UEKwXE71m70+NSH67bdgFTvhrQv9AA+E7sw98Nbnd/rtjlAbDznn/ypzKc2KnKuDc1TmWgXiT3KuRZU5Oq+6LrQ6BGlWIH6f5TlbK9zM9YNhzQaOKV4rR8M8RD23q7ibG0FOo4snwA6fuC18TVWU08Zyy+snwHNLrbxu8ZJ5F7zkIXUUdNP+XTEelddPgRfFAzZ4wmXAbBUcblAOF1QP+TJVcMSU0T2lPA7G5iH5HLctcsy6AWRDTD7LbYoedNeCS2DcYOK0SnVzW+In9S5JcEtzSfRL/DbHrigfnY896C2LPvQ4B/b4PBRLiZ7KdJg9wLvhMaUCqdDnNgkqtIJ9oBlspqITWMYvSj/5pWnE+ve5zev8hkxDfwUYAP0NkvYTPlJVAAAAAElFTkSuQmCC",
+                                        "Label": "Information Part",
+                                        "Link": {
+                                            "Label": "More info",
+                                            "Url": "https://gallery.technet.microsoft.com/scriptcenter/Monitor-sensitive-user-and-5a721d64"
+                                        }
+                                    },
+                                    "List": [
+                                        {
+                                            "Title": "Sensitive user and group activity in domain.",
+                                            "Content": "This view displays sensitive user and group membership changes within a domain. It can be further customized if needd.\n\nPlease make sure that you enable appropriate auditing policies on Default Domain Controllers Policy.\n\nFor more info and help please contact Marin Frankovic at mafranko@microsoft.com"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "User management",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Who changed user accounts",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "SecurityEvent | where EventID == 4720 or EventID == 4722 or EventID == 4725 or EventID == 4726 or EventID == 4730 | summarize AggregatedValue = count() by Account | sort by AggregatedValue desc\r\n// Oql: Type=SecurityEvent EventID=4720 OR EventID=4722 OR EventID=4725 OR EventID=4726 OR EventID=4730 | measure count() by Account",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where EventID == 4720 or EventID == 4722 or EventID == 4725 or EventID == 4726 or EventID == 4730 | summarize AggregatedValue = count() by Activity\r\n// Oql: Type=SecurityEvent EventID=4720 OR EventID=4722 OR EventID=4725 OR EventID=4726 OR EventID=4730 | measure count() by Activity",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Event ID",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}"
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Domain Admins",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "Users added",
+                                        "LegendColor": "#00188f",
+                                        "ChartQuery": "SecurityEvent | where (EventID == 4729 or EventID == 4728) and TargetUserName == \"Domain Admins\" | sort by TimeGenerated desc\r\n// Oql: Type=SecurityEvent (EventID=4729 OR EventID=4728) TargetUserName=\"Domain Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "All Changes",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search TargetUserName == \"Domain Admins\" | sort by TimeGenerated desc\r\n// Oql: TargetUserName=\"Domain Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID == 4729 or EventID == 4728) and TargetUserName == \"Domain Admins\" | summarize AggregatedValue = count() by Account\r\n// Oql: Type=SecurityEvent (EventID=4729 OR EventID=4728) TargetUserName=\"Domain Admins\" | measure count() by Account",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Privileged user",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}"
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Enterprise admins",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "Users added",
+                                        "LegendColor": "#00188f",
+                                        "ChartQuery": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Enterprise Admins\" | sort by TimeGenerated desc\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Enterprise Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "All Changes",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search TargetUserName == \"Enterprise Admins\" | sort by TimeGenerated desc\r\n// Oql: TargetUserName=\"Enterprise Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Enterprise Admins\" | summarize AggregatedValue = count() by Account\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Enterprise Admins\" | measure count() by Account",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Privileged User",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}"
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "SCHEMA ADMINS",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "Users added",
+                                        "LegendColor": "#00188f",
+                                        "ChartQuery": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Schema Admins\" | sort by TimeGenerated desc\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Schema Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "All changes",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search TargetUserName == \"Schema Admins\" | sort by TimeGenerated desc\r\n// Oql: TargetUserName=\"Schema Admins\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Schema Admins\" | summarize AggregatedValue = count() by Account\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Schema Admins\" | measure count() by Account",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Privileged user",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}"
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "TwoTrendsAndListBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Organization Management",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Trend1": {
+                                        "Legend": "Users added",
+                                        "LegendColor": "#00188f",
+                                        "ChartQuery": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Organization Management\" | sort by TimeGenerated desc\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Organization Management\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "Trend2": {
+                                        "Legend": "All Changes",
+                                        "LegendColor": "#0072c6",
+                                        "ChartQuery": "search TargetUserName == \"Organization Management\" | sort by TimeGenerated desc\r\n// Oql: TargetUserName=\"Organization Management\"",
+                                        "Calculation": {
+                                            "Operation": "Sum"
+                                        }
+                                    },
+                                    "List": {
+                                        "Query": "SecurityEvent | where (EventID == 4756 or EventID == 4757) and TargetUserName == \"Organization Management\" | summarize AggregatedValue = count() by Account\r\n// Oql: Type=SecurityEvent (EventID=4756 OR EventID=4757) TargetUserName=\"Organization Management\" | measure count() by Account",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Privileged user",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item}"
+                                    }
+                                }
+                            }
+                        ],
+                        "Filters": [],
+                        "OverviewTile": {
+                            "Id": "SingleQueryDonutBuilderTileV1",
+                            "Type": "OverviewTile",
+                            "Version": 2,
+                            "Configuration": {
+                                "Donut": {
+                                    "Query": "SecurityEvent | where EventID == 4720 or EventID == 4729 or EventID == 4728 or EventID == 4756 or EventID == 4757 | summarize AggregatedValue = count() by Activity | sort by AggregatedValue desc\r\n// Oql: Type=SecurityEvent EventID=4720 OR EventID=4729 OR EventID=4728 OR EventID=4756 OR EventID=4757 | measure count() by Activity",
+                                    "CenterLegend": {
+                                        "Text": "Total",
+                                        "Operation": "Sum",
+                                        "ArcsToSelect": []
+                                    },
+                                    "Options": {
+                                        "colors": [
+                                            "#00188f",
+                                            "#0072c6",
+                                            "#00bcf2"
+                                        ],
+                                        "valueColorMapping": [],
+                                        "legend": true,
+                                        "skipLegendPositioning": true,
+                                        "center": true,
+                                        "unitType": "Count",
+                                        "fromUnit": "Ones"
+                                    },
+                                    "HideOtherLegend": true
+                                },
+                                "Advanced": {
+                                    "DataFlowVerification": {
+                                        "Enabled": false,
+                                        "Query": "search *\r\n// Oql: *",
+                                        "Message": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
