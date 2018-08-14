@@ -43,7 +43,7 @@
                     "properties": {
                         "Id": "Azure Automation",
                         "Name": "Azure Automation",
-                        "Author": "jakob.knutsson@addlevel.se",
+                        "Author": "jakob.knutsson@hm.com",
                         "Source": "Local",
                         "Version": 2,
                         "Dashboard": [
@@ -76,10 +76,79 @@
                                                 "#00bcf2"
                                             ],
                                             "valueColorMapping": []
-                                        }
+                                        },
+                                        "NavigationSelect": {}
                                     },
                                     "List": {
                                         "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by RunbookName_s// Oql: Category=JobLogs  | measure count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
+                                        "HideGraph": false,
+                                        "enableSparklines": true,
+                                        "ColumnsTitle": {
+                                            "Name": "Name",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {
+                                            "NavigationQuery": "search {selected item} | sort by TimeGenerated desc"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "LineChartBuilderBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Recent Azure Automation Jobs",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "Jobs run",
+                                        "Subtitle": ""
+                                    },
+                                    "LineChart": {
+                                        "Query": "search Category == \"JobLogs\" and ResultType != \"started\" | summarize AggregatedValue = count() by bin(TimeGenerated, 1h), RunbookName_s | sort by TimeGenerated desc | render timechart// Oql: Category=JobLogs NOT(ResultType=\"started\") | measure Count() by RunbookName_s | display linechart // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
+                                        "yAxis": {
+                                            "isLogarithmic": false,
+                                            "units": {
+                                                "baseUnitType": "",
+                                                "baseUnit": "",
+                                                "displayUnit": ""
+                                            },
+                                            "customLabel": ""
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "search Category == \"JobLogs\" and ResultType != \"started\" | summarize AggregatedValue = count() by RunbookName_s// Oql: Category=JobLogs NOT(ResultType=\"started\") | measure Count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
                                         "HideGraph": false,
                                         "enableSparklines": true,
                                         "operation": "Summary",
@@ -112,72 +181,10 @@
                                             ]
                                         },
                                         "NameDSVSeparator": "",
-                                        "NavigationQuery": "search {selected item}// Oql: {selected item} // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {NVQ: True; PTT: True} // Version: 0.1.129"
-                                    }
-                                }
-                            },
-                            {
-                                "Id": "LineChartBuilderBlade",
-                                "Type": "Blade",
-                                "Version": 0,
-                                "Configuration": {
-                                    "General": {
-                                        "title": "Recent Azure Automation Jobs",
-                                        "newGroup": false,
-                                        "icon": "",
-                                        "useIcon": false
-                                    },
-                                    "Header": {
-                                        "Title": "Jobs run",
-                                        "Subtitle": ""
-                                    },
-                                    "LineChart": {
-                                        "Query": "search Category == \"JobLogs\" and ResultType != \"started\" | summarize AggregatedValue = count() by bin(TimeGenerated, 1h), RunbookName_s | sort by TimeGenerated desc | render timechart\r\n// Oql: Category=JobLogs NOT(ResultType=\"started\") | measure Count() by RunbookName_s | display linechart // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
-                                        "yAxis": {
-                                            "isLogarithmic": false,
-                                            "units": {
-                                                "baseUnitType": "",
-                                                "baseUnit": "",
-                                                "displayUnit": ""
-                                            },
-                                            "customLabel": ""
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {
+                                            "NavigationQuery": "search {selected item} | sort by TimeGenerated desc"
                                         }
-                                    },
-                                    "List": {
-                                        "Query": "search Category == \"JobLogs\" and ResultType != \"started\" | summarize AggregatedValue = count() by RunbookName_s\r\n// Oql: Category=JobLogs NOT(ResultType=\"started\") | measure Count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
-                                        "HideGraph": false,
-                                        "enableSparklines": true,
-                                        "operation": "Summary",
-                                        "ColumnsTitle": {
-                                            "Name": "Type",
-                                            "Value": "Count"
-                                        },
-                                        "Color": "#0072c6",
-                                        "thresholds": {
-                                            "isEnabled": false,
-                                            "values": [
-                                                {
-                                                    "name": "Normal",
-                                                    "threshold": "Default",
-                                                    "color": "#009e49",
-                                                    "isDefault": true
-                                                },
-                                                {
-                                                    "name": "Warning",
-                                                    "threshold": "60",
-                                                    "color": "#fcd116",
-                                                    "isDefault": false
-                                                },
-                                                {
-                                                    "name": "Error",
-                                                    "threshold": "90",
-                                                    "color": "#ba141a",
-                                                    "isDefault": false
-                                                }
-                                            ]
-                                        },
-                                        "NameDSVSeparator": "",
-                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item} // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {NVQ: True; PTT: True} // Version: 0.1.129"
                                     }
                                 }
                             },
@@ -197,7 +204,7 @@
                                         "Subtitle": ""
                                     },
                                     "Donut": {
-                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by ResultType | sort by AggregatedValue desc\r\n// Oql: Category=JobLogs  | measure count() by ResultType // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortM: True} // Version: 0.1.129",
+                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by ResultType | sort by AggregatedValue desc// Oql: Category=JobLogs  | measure count() by ResultType // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortM: True} // Version: 0.1.129",
                                         "CenterLegend": {
                                             "Text": "Total",
                                             "Operation": "Sum",
@@ -210,10 +217,11 @@
                                                 "#00bcf2"
                                             ],
                                             "valueColorMapping": []
-                                        }
+                                        },
+                                        "NavigationSelect": {}
                                     },
                                     "List": {
-                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by ResultType\r\n// Oql: Category=JobLogs  | measure count() by ResultType // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
+                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by ResultType// Oql: Category=JobLogs  | measure count() by ResultType // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
                                         "HideGraph": false,
                                         "enableSparklines": false,
                                         "operation": "Summary",
@@ -246,7 +254,10 @@
                                             ]
                                         },
                                         "NameDSVSeparator": "",
-                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item} // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {NVQ: True; PTT: True} // Version: 0.1.129"
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {
+                                            "NavigationQuery": "search {selected item} | sort by TimeGenerated desc"
+                                        }
                                     }
                                 }
                             },
@@ -266,7 +277,7 @@
                                         "Subtitle": ""
                                     },
                                     "Donut": {
-                                        "Query": "search Category == \"JobStreams\" | summarize AggregatedValue = count() by RunbookName_s | sort by AggregatedValue desc\r\n// Oql: Category=JobStreams | measure count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortM: True} // Version: 0.1.129",
+                                        "Query": "search Category == \"JobStreams\" | summarize AggregatedValue = count() by RunbookName_s | sort by AggregatedValue desc",
                                         "CenterLegend": {
                                             "Text": "Total",
                                             "Operation": "Sum",
@@ -279,15 +290,16 @@
                                                 "#00bcf2"
                                             ],
                                             "valueColorMapping": []
-                                        }
+                                        },
+                                        "NavigationSelect": {}
                                     },
                                     "List": {
-                                        "Query": "search Category == \"JobStreams\" | summarize AggregatedValue = count() by RunbookName_s\r\n// Oql: Category=JobStreams | measure count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
+                                        "Query": "search Category == \"JobStreams\" | summarize AggregatedValue = count() by RunbookName_s | sort by AggregatedValue desc",
                                         "HideGraph": false,
-                                        "enableSparklines": false,
+                                        "enableSparklines": true,
                                         "operation": "Summary",
                                         "ColumnsTitle": {
-                                            "Name": "Computer",
+                                            "Name": "Runbook Name",
                                             "Value": "Count"
                                         },
                                         "Color": "#0072c6",
@@ -315,8 +327,110 @@
                                             ]
                                         },
                                         "NameDSVSeparator": "",
-                                        "NavigationQuery": "search {selected item}\r\n// Oql: {selected item} // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {NVQ: True; PTT: True} // Version: 0.1.129"
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {
+                                            "NavigationQuery": "search {selected item} | sort by TimeGenerated desc"
+                                        }
                                     }
+                                }
+                            },
+                            {
+                                "Id": "SingleQueryDonutBuilderBladeV1",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "title": "Distribution by Automation Account",
+                                        "newGroup": false,
+                                        "icon": "",
+                                        "useIcon": false
+                                    },
+                                    "Header": {
+                                        "Title": "--",
+                                        "Subtitle": ""
+                                    },
+                                    "Donut": {
+                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by Resource | order by AggregatedValue desc",
+                                        "CenterLegend": {
+                                            "Text": "Total",
+                                            "Operation": "Sum",
+                                            "ArcsToSelect": []
+                                        },
+                                        "Options": {
+                                            "colors": [
+                                                "#00188f",
+                                                "#0072c6",
+                                                "#00bcf2"
+                                            ],
+                                            "valueColorMapping": []
+                                        },
+                                        "NavigationSelect": {}
+                                    },
+                                    "List": {
+                                        "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by Resource | order by AggregatedValue desc",
+                                        "HideGraph": false,
+                                        "enableSparklines": false,
+                                        "operation": "Summary",
+                                        "ColumnsTitle": {
+                                            "Name": "Automation Account",
+                                            "Value": "Count"
+                                        },
+                                        "Color": "#0072c6",
+                                        "thresholds": {
+                                            "isEnabled": false,
+                                            "values": [
+                                                {
+                                                    "name": "Normal",
+                                                    "threshold": "Default",
+                                                    "color": "#009e49",
+                                                    "isDefault": true
+                                                },
+                                                {
+                                                    "name": "Warning",
+                                                    "threshold": "60",
+                                                    "color": "#fcd116",
+                                                    "isDefault": false
+                                                },
+                                                {
+                                                    "name": "Error",
+                                                    "threshold": "90",
+                                                    "color": "#ba141a",
+                                                    "isDefault": false
+                                                }
+                                            ]
+                                        },
+                                        "NameDSVSeparator": "",
+                                        "NavigationQuery": "search {selected item} | sort by TimeGenerated desc",
+                                        "NavigationSelect": {
+                                            "NavigationQuery": "search {selected item} | sort by TimeGenerated desc"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "Id": "InformationBlade",
+                                "Type": "Blade",
+                                "Version": 0,
+                                "Configuration": {
+                                    "General": {
+                                        "Title": "",
+                                        "NewGroup": false,
+                                        "Color": "#0072c6"
+                                    },
+                                    "Header": {
+                                        "Image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAztJREFUeNrUmktoE1EUhqexKj4zJWoaqIpVaVGxKr6ogsaNbhS0YKkKFeKmriwFEaXYnY+FYjeCbmtRRBeuXIlLMe1CXGlduBOt0rS1FaF2/A+ciWMy0yT3njvN/PBtMuHc8899zJ1zp8ZxHEtAKXAE7AdNYBOwGVKO+QQ+gDfgFfii23CNhoHV4CyzWzHGEBgEA2BUKQIZqJAG0A+mHTn9AvfB2krzqeTPi8AVMOWYE92UPrBY2kAzeOeEp/fcZsncYmWMsjaQBdut8LSN22zTnQMXwYwzf5rhHJSGUJdTPeoKyjNoGT0JnoIFCt1/GXwOuNYIbirE/APawbNyhlATmNS4W4fm6NW0Rlxa/baWmsQLwROwXGMC2orXSmkpeMw55lVooAe0aK4gcUMG3NWpJ8hAA+gVWAJtRXPlqpdzLTJwlbvJpAFbID7leK3QwCpwXughFDdsgNTJOecN0A9LhIKbHkIW59rpNdAhuA2wQ+gB0hnXQBLsiqCBnaCeDKTpxUYwcDwkA5TzYTLQKryTDGMOuDoQ44eDFcEhRNpCBtYJB42HaGC9O4klVRuwl1opPNdIa2KaG7dK7nSdgXZWxCwzskOYwPmtxISBuPEQxj9pnAx8NRC4LiQDo2RgJMI98DHGtUpppbgXvNSbMEAv9af5NTKKaicDtK/+ZmCNNi0qpyRpCH3nKnHUNOROYtIj4eDTXP9JMzfAlHAbg966UEKwXE71m70+NSH67bdgFTvhrQv9AA+E7sw98Nbnd/rtjlAbDznn/ypzKc2KnKuDc1TmWgXiT3KuRZU5Oq+6LrQ6BGlWIH6f5TlbK9zM9YNhzQaOKV4rR8M8RD23q7ibG0FOo4snwA6fuC18TVWU08Zyy+snwHNLrbxu8ZJ5F7zkIXUUdNP+XTEelddPgRfFAzZ4wmXAbBUcblAOF1QP+TJVcMSU0T2lPA7G5iH5HLctcsy6AWRDTD7LbYoedNeCS2DcYOK0SnVzW+In9S5JcEtzSfRL/DbHrigfnY896C2LPvQ4B/b4PBRLiZ7KdJg9wLvhMaUCqdDnNgkqtIJ9oBlspqITWMYvSj/5pWnE+ve5zev8hkxDfwUYAP0NkvYTPlJVAAAAAElFTkSuQmCC",
+                                        "Label": "Azure Automation",
+                                        "Link": {
+                                            "Label": "Link to JSON",
+                                            "Url": "https://github.com/kntsn/OMS/blob/master/Azure%20Automation.omsview"
+                                        }
+                                    },
+                                    "List": [
+                                        {
+                                            "Title": "A view for our Azure automation account activity",
+                                            "Content": "\nA view built by Jakob Knutsson H&M Cloud Office"
+                                        }
+                                    ]
                                 }
                             }
                         ],
@@ -327,7 +441,7 @@
                             "Version": 2,
                             "Configuration": {
                                 "Donut": {
-                                    "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by RunbookName_s | sort by AggregatedValue desc\r\n// Oql: Category=JobLogs  | measure count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortM: True} // Version: 0.1.129",
+                                    "Query": "search Category == \"JobLogs\" | summarize AggregatedValue = count() by RunbookName_s | sort by AggregatedValue desc// Oql: Category=JobLogs  | measure count() by RunbookName_s // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortM: True} // Version: 0.1.129",
                                     "CenterLegend": {
                                         "Text": "Total",
                                         "Operation": "Sum",
@@ -351,7 +465,7 @@
                                 "Advanced": {
                                     "DataFlowVerification": {
                                         "Enabled": false,
-                                        "Query": "search *\r\n// Oql: * // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
+                                        "Query": "search *// Oql: * // Args: {OQ: True; WorkspaceId: 5df19e71-7b8b-4444-924a-cc1aae20ec9e} // Settings: {PTT: True; SortI: True} // Version: 0.1.129",
                                         "Message": ""
                                     }
                                 }
